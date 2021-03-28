@@ -2,14 +2,18 @@
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>PWA POC</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://canvasjs.com/assets/css/jquery-ui.1.11.2.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-ui.1.11.2.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script src="js/app.js"></script>
 </head>
 
@@ -29,27 +33,17 @@
     </nav>
 
     <div class="container">
-        <h3>System Data</h3>
-        <p></p>
+        <div id="resizable" style="height: 370px;border:1px solid gray;">
+            <div id="chartContainer1" style="height: 100%; width: 100%;"></div>
+        </div>
+        <br><br><br>
+        <div id="resizable" style="height: 370px;border:1px solid gray;">
+            <div id="chartContainer2" style="height: 100%; width: 100%;"></div>
+        </div>
     </div>
 
 </body>
 
-<script>
-    // The ID of the extension we want to talk to.
-    var laserExtensionId = "lbaoddlfnnkcaacjlcaekegchbdjddbe";
-
-    // Make a simple request:
-    var port = chrome.runtime.connect(laserExtensionId);
-    port.onMessage.addListener(function(msg, pp) {
-        console.log(msg);
-    });
-    port.postMessage({
-        question: "CPU"
-    });
-    port.postMessage({
-        question: "Memory"
-    });
-</script>
+<script src="js/system_data.js"></script>
 
 </html>

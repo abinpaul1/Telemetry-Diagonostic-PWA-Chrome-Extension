@@ -1,4 +1,8 @@
-// this is the background code...
+// NOTE: chrome.runtime is exposed by default now only on HTTPS sites, 
+// not on HTTP.To have it on HTTP you need to install an extension that
+// has that URL matched in its externally_connectable.
+
+// On localhost with certificate, extension disconnects port.
 let CPU_info;
 let Memory_info, Storage_info, Display_info;
 
@@ -25,6 +29,7 @@ function pollForMemoryInfo() {
 function pollForStorageInfo() {
     chrome.system.storage.getInfo(function(info) {
         Storage_info = info;
+        console.log(JSON.stringify(Storage_info));
         setTimeout(pollForStorageInfo, POLL_TIME_DELAY);
     });
 }
@@ -32,7 +37,7 @@ function pollForStorageInfo() {
 function pollForDisplayInfo() {
     chrome.system.display.getInfo(function(info) {
         Display_info = info;
-        console.log(JSON.stringify(info));
+        console.log(JSON.stringify(Display_info));
         setTimeout(pollForDisplayInfo, POLL_TIME_DELAY);
     });
 }
@@ -54,11 +59,29 @@ chrome.runtime.onConnectExternal.addListener(function(port) {
 });
 
 
+chrome.runtime.onConnect.addListener(function(port) {
+    port.onMessage.addListener(function(msg) {
+        if (msg.question == "CPU")
+            port.postMessage({ answer: JSON.stringify(CPU_info) });
+        else if (msg.question == "Memory")
+            port.postMessage({ answer: JSON.stringify(Memory_info) });
+        else if (msg.question == "Storage")
+            port.postMessage({ answer: JSON.stringify(Storage_info) });
+        else if (msg.question == "Display")
+            port.postMessage({ answer: JSON.stringify(Display_info) });
+
+    });
+});
+
+// Startup of browser start polling every few seconds
+chrome.runtime.onStartup.addListener(pollForCPUInfo);
+chrome.runtime.onStartup.addListener(pollForMemoryInfo);
+chrome.runtime.onStartup.addListener(pollForDisplayInfo);
+chrome.runtime.onStartup.addListener(pollForStorageInfo);
+
+
+// Start polling when installed as well
 chrome.runtime.onInstalled.addListener(pollForCPUInfo);
 chrome.runtime.onInstalled.addListener(pollForMemoryInfo);
 chrome.runtime.onInstalled.addListener(pollForDisplayInfo);
 chrome.runtime.onInstalled.addListener(pollForStorageInfo);
-
-// Startup start polling for data every 30 seconds
-chrome.runtime.onStartup.addListener(pollForCPUInfo);
-chrome.runtime.onStartup.addListener(pollForMemoryInfo);

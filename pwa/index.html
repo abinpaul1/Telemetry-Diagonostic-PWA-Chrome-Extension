@@ -35,4 +35,21 @@
 
 </body>
 
+<script>
+    // The ID of the extension we want to talk to.
+    var laserExtensionId = "lbaoddlfnnkcaacjlcaekegchbdjddbe";
+
+    // Make a simple request:
+    var port = chrome.runtime.connect(laserExtensionId);
+    port.onMessage.addListener(function(msg, pp) {
+        console.log(msg);
+    });
+    port.postMessage({
+        question: "CPU"
+    });
+    port.postMessage({
+        question: "Memory"
+    });
+</script>
+
 </html>

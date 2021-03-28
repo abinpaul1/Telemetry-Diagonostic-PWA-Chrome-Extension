@@ -114,6 +114,5 @@ function updateMemory(memoryInfo) {
         x: Math.floor((new Date() - start_time) / 1000),
         y: usedMem
     });
-    console.log(datapoints_arr)
     memUtilizationChart.render();
 }

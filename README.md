@@ -67,6 +67,10 @@ In /etc/hosts add the following line
 - Load extension using Developer tools
 
 
+# Screenshots
+![Running-Offline](./Screenshots/Running_locally.png)
+
+
 # References
 - https://github.com/ibrahima92/pwa-with-vanilla-js
 - https://github.com/beaufortfrancois/cog-chrome-app/

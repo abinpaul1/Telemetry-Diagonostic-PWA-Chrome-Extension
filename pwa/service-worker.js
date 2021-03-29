@@ -1,4 +1,4 @@
-const staticDevCoffee = "pwa-poc-v1";
+const staticDevCoffee = "telemetry-pwa-v1";
 const assets = [
     "/",
     "/index.html",

@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "Extension POC",
+    "name": "Telemtry Chrome Helper Extension",
     "version": "1.0",
     "permissions": [
         "system.cpu",
@@ -14,7 +14,7 @@
     },
     "externally_connectable": {
         "matches": [
-            "*://unblockit.ltd/*"
+            "*://example.com/*"
         ]
     }
 }

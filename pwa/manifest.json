@@ -1,6 +1,6 @@
 {
-    "name": "POC PWA",
-    "short_name": "POC PWA",
+    "name": "Telemtry PWA",
+    "short_name": "Telemtry PWA",
     "start_url": "index.html",
     "display": "standalone",
     "background_color": "#fdfdfd",

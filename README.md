@@ -1,13 +1,28 @@
+# View hosted demp
+## Installing extension
+- Load extension using Developer tools. Keep a note of the ID that is assigned to the extension.
+
+## Online PWA
+- Visit https://telemetry-pwa.primeideas.in/
+- When prompted enter the Chrome Extension Id you noted above
+
+
 # Installing and running locally
 ```
 git clone https://github.com/abinpaul1/Telemetry-Diagonostic-PWA-Chrome-Extension 
 ```
+## Installing extension
+- Change domain name (telemetry-pwa.primeideas.in) to the domain of your choice (yourdomain.com) in manifest.json file in the `extension` folder
+- Load extension using Developer tools. Keep a note of the ID that is assigned to the extension.
+
 ## Setting up PWA locally
 
 #### Note
 - For PWA to interact with the extension, it requires a valid domain as origin. (`chrome.runtime` is undefined when origin is localhost)
 - The domain needs to have a valid SSL certificate to be installable. Without HTTPS, the web app will function but can't be installed locally
 
+#### Linking PWA to extension
+- In pwa/js/system_data.js change the value of variable `chromeExtensionId` to the ID of the installed extension
 
 #### Setting up domain
 - Add entry in /etc/hosts file to point domain to localhost
@@ -18,7 +33,7 @@ In /etc/hosts add the following line
 - To see the webapp now (not installable) you can navigate into the `pwa` folder and start a http server from there. To do using python, run the following from the directory
 
     `python3 -m http.server 8080`
-- Open http://yourdomain.com:8080 in the browser to see the web app in action (provided you have already installed the accompanying extension)
+- Open http://yourdomain.com:8080 in Chrome to see the web app in action (provided you have already installed the accompanying extension)
 
 #### Adding HTTPS
 - Install apache web server
@@ -27,15 +42,16 @@ In /etc/hosts add the following line
     sudo apt install apache2
     ```
 - Generate SSL certificate using `mkcert`
+    - `sudo apt install libnss3-tools`
     - Install `mkcert` following the instructions available [here](https://github.com/FiloSottile/mkcert#installation), then run the following commands
     ```
     mkcert -install
     mkcert yourdomain.com
     ```
-    This will generate a cetificate pem file and key pem file for your domain
+    This will generate a cetificate pem file and key pem file for your domain. Restart Chrome.
 - Configuring domain on apache server
     - `sudo a2enmod ssl`
-    - `sudo nano etc/apache2/sites-enabled/yourdomain.com.conf`
+    - `sudo nano /etc/apache2/sites-available/yourdomain.com.conf`
         - Add the following
         ```
         <VirtualHost *:443>
@@ -58,13 +74,7 @@ In /etc/hosts add the following line
     - `sudo a2ensite yourdomain.com.conf`
     - `sudo apache2ctl configtest` should print `Syntax OK`
     - `sudo systemctl restart apache2`
-    - Open https://yourdomain.com in the browser to see the web app in action (provided you have already installed the accompanying extension). This webapp should be installable as well.
-
-
-
-## Installing extension
-- Change domain name (example.com) to the domain of your choice (yourdomain.com) in manifest.json file in the `extension` folder
-- Load extension using Developer tools
+    - Open https://yourdomain.com in Chrome to see the web app in action (provided you have already installed the accompanying extension). This webapp should be installable as well.
 
 
 # Screenshots

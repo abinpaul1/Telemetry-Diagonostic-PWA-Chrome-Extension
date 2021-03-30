@@ -4,8 +4,8 @@ const MEMORY_TIME_RANGE = 60 // x-axis time width in seconds
 const start_time = new Date();
 
 
-var laserExtensionId = "lbaoddlfnnkcaacjlcaekegchbdjddbe";
-var port = chrome.runtime.connect(laserExtensionId);
+var chromeExtensionId = "lbaoddlfnnkcaacjlcaekegchbdjddbe";
+var port = chrome.runtime.connect(chromeExtensionId);
 
 // The ID of the extension we want to talk to.
 let prevCpuInfo;

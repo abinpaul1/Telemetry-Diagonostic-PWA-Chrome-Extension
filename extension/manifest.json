@@ -14,7 +14,7 @@
     },
     "externally_connectable": {
         "matches": [
-            "*://example.com/*"
+            "*://telemetry-pwa.primeideas.in/*"
         ]
     }
 }

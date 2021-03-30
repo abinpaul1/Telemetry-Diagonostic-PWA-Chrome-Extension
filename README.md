@@ -1,4 +1,4 @@
-# View hosted demp
+# View hosted demo
 ## Installing extension
 - Load extension using Developer tools. Keep a note of the ID that is assigned to the extension.
 
@@ -6,13 +6,16 @@
 - Visit https://telemetry-pwa.primeideas.in/
 - When prompted enter the Chrome Extension Id you noted above
 
+## Online demo
+![Running-Online](./Screenshots/Online_Demo.gif)
+
 
 # Installing and running locally
 ```
 git clone https://github.com/abinpaul1/Telemetry-Diagonostic-PWA-Chrome-Extension 
 ```
 ## Installing extension
-- Change domain name (telemetry-pwa.primeideas.in) to the domain of your choice (yourdomain.com) in manifest.json file in the `extension` folder
+- Change domain name (example.com) to the domain of your choice (yourdomain.com) in manifest.json file in the `extension` folder
 - Load extension using Developer tools. Keep a note of the ID that is assigned to the extension.
 
 ## Setting up PWA locally
